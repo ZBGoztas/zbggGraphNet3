@@ -45,6 +45,9 @@ Kullanım
 """
 
 from __future__ import annotations
+from pathlib import Path as _P
+_REPO_ROOT = _P(__file__).resolve().parents[1]
+_WORKSPACE = _REPO_ROOT.parent  # expected layout: <workspace>/DATA and <workspace>/<this repo>
 
 import argparse
 import csv
@@ -1261,13 +1264,13 @@ def _parse_args() -> argparse.Namespace:
                    default=str(PROJECT_ROOT / "data_vocabulary" / "ai_vocabulary.json"),
                    help="ai_vocabulary.json yolu.")
     p.add_argument("--norm-csv", type=str,
-                   default=r"<local-path>",
+                   default=str(_WORKSPACE / "DATA" / "normalize_parameter.csv"),
                    help="normalize_parameter.csv yolu.")
     p.add_argument("--pt-dir", type=str,
-                   default=r"<local-path>",
+                   default=str(_WORKSPACE / "DATA" / "PT_FILES"),
                    help="Test .pt dosyalarının bulunduğu klasör.")
     p.add_argument("--refined-dir", type=str,
-                   default=r"<local-path>",
+                   default=str(_WORKSPACE / "DATA" / "REFINED_NAS"),
                    help="Ground-truth REFINED .nas dosyalarının klasörü.")
     p.add_argument("--output", type=str,
                    default=str(PROJECT_ROOT / "output_generated_v4.nas"),

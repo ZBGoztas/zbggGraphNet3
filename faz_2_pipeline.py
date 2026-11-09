@@ -16,6 +16,9 @@ Kullanım:
     python faz_2_pipeline.py --vocab data_vocabulary/ai_vocabulary.json --output-dir ./out
 """
 
+from pathlib import Path as _P
+_REPO_ROOT = _P(__file__).resolve().parents[0]
+_WORKSPACE = _REPO_ROOT.parent  # expected layout: <workspace>/DATA and <workspace>/<this repo>
 import csv
 import json
 import sys
@@ -46,7 +49,7 @@ from utils.logger_utils import get_context_logger
 
 DEFAULT_VOCAB_PATH = PROJECT_ROOT / "data_vocabulary" / "ai_vocabulary.json"
 DEFAULT_OUTPUT_DIR  = PROJECT_ROOT / "data" / "processed"
-DEFAULT_NORM_CSV    = Path(r"<local-path>")
+DEFAULT_NORM_CSV    = str(_WORKSPACE / "DATA" / "normalize_parameter.csv")
 
 # ai_vocabulary.json'daki özel token ID'leri (FAZ 1 ile uyumlu)
 TOKEN_PAD   = 0

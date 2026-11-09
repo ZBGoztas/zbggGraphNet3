@@ -19,6 +19,9 @@ Kullanım:
 """
 
 from __future__ import annotations
+from pathlib import Path as _P
+_REPO_ROOT = _P(__file__).resolve().parents[1]
+_WORKSPACE = _REPO_ROOT.parent  # expected layout: <workspace>/DATA and <workspace>/<this repo>
 
 import json
 import math
@@ -56,14 +59,13 @@ class Config:
 
     # ── Dosya Yolları ──────────────────────────────────────────────────────────
     PT_FILES_PATH: str = (
-        r"<local-path>"
+        str(_WORKSPACE / "DATA" / "PT_FILES")
     )
     VOCAB_PATH: str = (
-        r"<local-path>"
-        r"\data_vocabulary\ai_vocabulary.json"
+        str(_REPO_ROOT / "data_vocabulary" / "ai_vocabulary.json")
     )
     CHECKPOINT_PATH: str = (
-        r"<local-path>"
+        str(_REPO_ROOT / "checkpoints")
     )
 
     # ── Encoder Hiperparametreleri ─────────────────────────────────────────────

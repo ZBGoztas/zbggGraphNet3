@@ -22,6 +22,9 @@ Kullanım:
 """
 
 from __future__ import annotations
+from pathlib import Path as _P
+_REPO_ROOT = _P(__file__).resolve().parents[1]
+_WORKSPACE = _REPO_ROOT.parent  # expected layout: <workspace>/DATA and <workspace>/<this repo>
 
 import argparse
 import csv
@@ -947,17 +950,17 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument(
         "--norm-csv",
         type=str,
-        default=r"<local-path>",
+        default=str(_WORKSPACE / "DATA" / "normalize_parameter.csv"),
     )
     p.add_argument(
         "--pt-dir",
         type=str,
-        default=r"<local-path>",
+        default=str(_WORKSPACE / "DATA" / "PT_FILES"),
     )
     p.add_argument(
         "--refined-dir",
         type=str,
-        default=r"<local-path>",
+        default=str(_WORKSPACE / "DATA" / "REFINED_NAS"),
     )
     p.add_argument(
         "--output",
